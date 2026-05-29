@@ -1,0 +1,81 @@
+<div class="auth-page">
+  <div class="auth-left">
+    <div class="brand">
+      <span class="label">Start curating</span>
+      <h1 class="display">Quick<br />Link</h1>
+      <p class="tagline">
+        Save links. Get summaries.<br />Never lose an article again.
+      </p>
+    </div>
+  </div>
+
+  <div class="auth-right">
+    <div class="auth-form-wrapper">
+      <div class="auth-header">
+        <span class="label">New account</span>
+        <h2 class="heading-1">Create account</h2>
+      </div>
+
+      <form [formGroup]="form" (ngSubmit)="submit()">
+        <div class="field">
+          <label class="label" for="email">Email</label>
+          <input
+            id="email"
+            type="email"
+            formControlName="email"
+            placeholder="you@example.com"
+            autocomplete="email"
+          />
+          @if (form.get("email")?.touched && form.get("email")?.invalid) {
+            <span class="field-error">Valid email required</span>
+          }
+        </div>
+
+        <div class="field">
+          <label class="label" for="username">Username</label>
+          <input
+            id="username"
+            type="text"
+            formControlName="username"
+            placeholder="yourname"
+            autocomplete="username"
+          />
+          @if (form.get("username")?.touched && form.get("username")?.invalid) {
+            <span class="field-error">Min 3 characters</span>
+          }
+        </div>
+
+        <div class="field">
+          <label class="label" for="password">Password</label>
+          <input
+            id="password"
+            type="password"
+            formControlName="password"
+            placeholder="••••••••"
+            autocomplete="new-password"
+          />
+          @if (form.get("password")?.touched && form.get("password")?.invalid) {
+            <span class="field-error">Min 8 characters</span>
+          }
+        </div>
+
+        @if (error) {
+          <div class="form-error">{{ error }}</div>
+        }
+
+        <button type="submit" class="btn-primary" [disabled]="loading">
+          @if (loading) {
+            <span class="mono">creating account...</span>
+          } @else {
+            <span>Create account</span>
+          }
+        </button>
+      </form>
+
+      <p class="auth-link">
+        Already have an account?
+        <a routerLink="/auth/login">Sign in</a>
+      </p>
+    </div>
+  </div>
+</div>

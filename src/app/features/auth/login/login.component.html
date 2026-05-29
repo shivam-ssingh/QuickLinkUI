@@ -1,0 +1,62 @@
+<div class="auth-page">
+  <div class="auth-left">
+    <div class="brand">
+      <span class="label">Your personal</span>
+      <h1 class="display">Quick<br />Link</h1>
+      <p class="tagline">Curate. Summarise. Remember.</p>
+    </div>
+  </div>
+
+  <div class="auth-right">
+    <div class="auth-form-wrapper">
+      <div class="auth-header">
+        <span class="label">Welcome back</span>
+        <h2 class="heading-1">Sign in</h2>
+      </div>
+
+      <form [formGroup]="form" (ngSubmit)="submit()">
+        <div class="field">
+          <label class="label" for="email">Email</label>
+          <input
+            id="email"
+            type="email"
+            formControlName="email"
+            placeholder="you@example.com"
+            autocomplete="email"
+          />
+          @if (form.get("email")?.touched && form.get("email")?.invalid) {
+            <span class="field-error">Valid email required</span>
+          }
+        </div>
+
+        <div class="field">
+          <label class="label" for="password">Password</label>
+          <input
+            id="password"
+            type="password"
+            formControlName="password"
+            placeholder="••••••••"
+            autocomplete="current-password"
+          />
+        </div>
+
+        @if (error) {
+          <div class="form-error">{{ error }}</div>
+        }
+
+        <button type="submit" class="btn-primary" [disabled]="loading">
+          @if (loading) {
+            <span class="mono">signing in...</span>
+          } @else {
+            <span>Sign in</span>
+          }
+        </button>
+      </form>
+
+      <p class="auth-link">
+        No account?
+        <a routerLink="/auth/register">Create one</a>
+      </p>
+    </div>
+  </div>
+</div>
